@@ -20,7 +20,6 @@ var c *cache.Cache
 var r *mux.Router
 
 func init() {
-	fmt.Println("** init çalıştı")
 	initCache()
 	initLoadCacheFromFile()
 	initSaveFile()
@@ -37,18 +36,10 @@ func main() {
 	r.HandleFunc("/delete/{key}", Delete).Methods(http.MethodDelete)
 	r.HandleFunc("/", Index).Methods(http.MethodGet)
 
+	//setupHost()
 	httpLogServer()
 
-	host := "8000"
-	herokuHost, ok := os.LookupEnv("PORT")
-	if !ok {
-		fmt.Println("HEROKU_PORT is not present", host)
-	} else {
-		host = herokuHost
-		fmt.Printf("Heroku Port: %s\n", host)
-	}
-
-	http.ListenAndServe(host, r)
+	http.ListenAndServe(":8000", r)
 
 }
 
@@ -149,7 +140,7 @@ func initMuxRouter() {
 //Save the cache and cache file periodically
 //I prefer it to run every 15 seconds
 func SaveDataInterval() {
-	for range time.Tick(time.Second * 15) {
+	for range time.Tick(time.Minute * 1) {
 		initSaveFile()
 		service.GetAll(c, "GET")
 		fmt.Println("File automatic saved.")

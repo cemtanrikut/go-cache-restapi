@@ -1,8 +1,0 @@
-
-spec:
-  name: go-cache-restapi
-  services:
-  - name: web
-    git:
-      branch: main
-      repo_clone_url: https://github.com/cemtanrikut/go-cache-restapi.git
