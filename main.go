@@ -20,6 +20,7 @@ var c *cache.Cache
 var r *mux.Router
 
 func init() {
+	fmt.Println("*************", os.Getenv("PORT"))
 	initCache()
 	initLoadCacheFromFile()
 	initSaveFile()
@@ -39,7 +40,7 @@ func main() {
 	//setupHost()
 	httpLogServer()
 
-	http.ListenAndServe(":8000", r)
+	http.ListenAndServe(":"+os.Getenv("PORT"), r)
 
 }
 
