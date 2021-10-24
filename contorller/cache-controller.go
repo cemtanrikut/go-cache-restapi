@@ -1,10 +1,10 @@
 package contorller
 
 import (
-	"cachedeneme/cache"
-	"cachedeneme/helper"
-	"cachedeneme/model"
 	"fmt"
+	"go-cache-restapi/cache"
+	"go-cache-restapi/helper"
+	"go-cache-restapi/model"
 )
 
 func Get(c *cache.Cache, key string, method string) ([]byte, *helper.Resp) {
