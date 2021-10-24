@@ -39,13 +39,7 @@ func main() {
 
 	httpLogServer()
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000" // Default port if not specified
-	}
-
-	http.TimeoutHandler(r, 60*time.Second, "timeout")
-	http.ListenAndServe(port, r)
+	http.ListenAndServe(":8000", r)
 
 }
 
