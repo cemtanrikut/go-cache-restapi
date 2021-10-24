@@ -38,7 +38,7 @@ func main() {
 
 	httpLogServer()
 
-	http.ListenAndServe(os.Getenv("/"), r)
+	http.ListenAndServe(os.Getenv(":8000"), r)
 
 }
 
