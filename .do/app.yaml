@@ -1,0 +1,6 @@
+name: sample-golang
+services:
+- name: web
+  github:
+    repo: cemtanrikut/go-cache-restapi
+    branch: main

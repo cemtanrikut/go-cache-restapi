@@ -42,7 +42,7 @@ func main() {
 	host := "8000"
 	herokuHost, ok := os.LookupEnv("PORT")
 	if !ok {
-		fmt.Println("HEROKU_PORT is not present")
+		fmt.Println("HEROKU_PORT is not present", host)
 	} else {
 		host = herokuHost
 		fmt.Printf("Heroku Port: %s\n", host)
