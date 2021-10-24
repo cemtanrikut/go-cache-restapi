@@ -1,1 +1,1 @@
-web: bin/go-cache-restapi
+web: bin/go-cache-restapi 
