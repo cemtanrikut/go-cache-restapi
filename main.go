@@ -138,9 +138,9 @@ func initMuxRouter() {
 }
 
 //Save the cache and cache file periodically
-//I prefer it to run every 2 minutes
+//I prefer it to run every 15 seconds
 func SaveDataInterval() {
-	for range time.Tick(time.Minute * 2) {
+	for range time.Tick(time.Second * 15) {
 		initSaveFile()
 		service.GetAll(c, "GET")
 		fmt.Println("File automatic saved.")
