@@ -35,11 +35,17 @@ func main() {
 	r.HandleFunc("/flush", Flush).Methods(http.MethodGet)
 	r.HandleFunc("/get", GetAll).Methods(http.MethodGet)
 	r.HandleFunc("/delete/{key}", Delete).Methods(http.MethodDelete)
+	r.HandleFunc("/", Index).Methods(http.MethodGet)
 
 	httpLogServer()
 
 	http.ListenAndServe(os.Getenv(":8000"), r)
 
+}
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte("Index Page"))
 }
 
 func Get(w http.ResponseWriter, r *http.Request) {
