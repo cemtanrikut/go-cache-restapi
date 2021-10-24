@@ -19,6 +19,15 @@ import (
 var c *cache.Cache
 var r *mux.Router
 
+func init() {
+	initCache()
+	initLoadCacheFromFile()
+	initSaveFile()
+	initMuxRouter()
+	//I use Goroutine. Bcs goroutine works better performance than thread
+	go SaveDataInterval()
+}
+
 func main() {
 	r.HandleFunc("/get/{key}", Get).Methods(http.MethodGet)
 	r.HandleFunc("/set", Set).Methods(http.MethodPost)
@@ -86,6 +95,8 @@ type Reader interface {
 func initCache() {
 	c = cache.New(5*time.Minute, 10*time.Minute)
 }
+
+//Load the cache from saved file when you can run the project
 func initLoadCacheFromFile() {
 	fileName := "TIMESTAMP-data.gob"
 	_, err := os.Open("tmp/" + fileName)
@@ -112,6 +123,17 @@ func initSaveFile() {
 }
 func initMuxRouter() {
 	r = mux.NewRouter()
+}
+
+//Save the cache and cache file periodically
+//I prefer it to run every 2 minutes
+func SaveDataInterval() {
+	for range time.Tick(time.Minute * 2) {
+		initSaveFile()
+		service.GetAll(c, "GET")
+		fmt.Println("File automatic saved.")
+	}
+	time.Sleep(time.Second * 5)
 }
 
 func httpLogServer() {
