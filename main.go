@@ -40,7 +40,7 @@ func main() {
 	httpLogServer()
 
 	r.Host("0.0.0.0")
-	http.ListenAndServe(os.Getenv(":8000"), r)
+	http.ListenAndServe(os.Getenv(":8080"), r)
 
 }
 
