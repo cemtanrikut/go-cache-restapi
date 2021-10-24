@@ -104,10 +104,10 @@ func Flush(c *cache.Cache, m string) *helper.Resp {
 
 func SaveCacheFile(c *cache.Cache, fileName string) {
 	c.SaveFile(fileName)
-	fmt.Println("/controller/savecachefile çalıştı")
+	fmt.Println("/controller/savecachefile run")
 }
 
 func LoadCacheFile(c *cache.Cache, fileName string) {
 	c.LoadFile(fileName)
-	fmt.Println("/controller/LoadCacheFile çalıştı")
+	fmt.Println("/controller/LoadCacheFile run")
 }

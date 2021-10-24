@@ -20,6 +20,7 @@ var c *cache.Cache
 var r *mux.Router
 
 func init() {
+	fmt.Println("** init çalıştı")
 	initCache()
 	initLoadCacheFromFile()
 	initSaveFile()
@@ -48,12 +49,14 @@ func Get(w http.ResponseWriter, r *http.Request) {
 	_, resp := service.Get(c, key, r.Method)
 	response := helper.JsonMarshall(resp)
 	w.Write(response)
+	initSaveFile()
 }
 func GetAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	_, resp := service.GetAll(c, r.Method)
 	response := helper.JsonMarshall(resp)
 	w.Write(response)
+	initSaveFile()
 }
 
 //If exist item key, this item will update
@@ -66,6 +69,7 @@ func Set(w http.ResponseWriter, r *http.Request) {
 		resp := service.Set(keyVal, c, r.Method)
 		response := helper.JsonMarshall(resp)
 		w.Write(response)
+		initSaveFile()
 	}
 }
 
@@ -76,6 +80,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	resp := service.Delete(c, key, r.Method)
 	response := helper.JsonMarshall(resp)
 	w.Write(response)
+	initSaveFile()
 }
 
 func Flush(w http.ResponseWriter, r *http.Request) {
@@ -83,6 +88,7 @@ func Flush(w http.ResponseWriter, r *http.Request) {
 	resp := service.Flush(c, r.Method)
 	response := helper.JsonMarshall(resp)
 	w.Write(response)
+	initSaveFile()
 }
 
 type Writer interface {
