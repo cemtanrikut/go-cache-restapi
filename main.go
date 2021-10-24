@@ -39,14 +39,16 @@ func main() {
 
 	httpLogServer()
 
+	host := "8000"
 	herokuHost, ok := os.LookupEnv("PORT")
 	if !ok {
 		fmt.Println("HEROKU_PORT is not present")
 	} else {
-		fmt.Printf("Heroku Port: %s\n", herokuHost)
+		host = herokuHost
+		fmt.Printf("Heroku Port: %s\n", host)
 	}
 
-	http.ListenAndServe(":8000", r)
+	http.ListenAndServe(host, r)
 
 }
 
